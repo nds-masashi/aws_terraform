@@ -83,9 +83,14 @@ resource "aws_instance" "ec2_instance_public" {
 
   # Redhatの場合
   user_data = <<-EOF
+    #!/bin/bash
     sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
     sudo systemctl enable amazon-ssm-agent
     sudo systemctl start amazon-ssm-agent
+    mkdir /tmp/ec2-instance-connect
+    curl https://amazon-ec2-instance-connect-us-west-2.s3.us-west-2.amazonaws.com/latest/linux_amd64/ec2-instance-connect.rpm -o /tmp/ec2-instance-connect/ec2-instance-connect.rpm
+    curl https://amazon-ec2-instance-connect-us-west-2.s3.us-west-2.amazonaws.com/latest/linux_amd64/ec2-instance-connect-selinux.noarch.rpm -o /tmp/ec2-instance-connect/ec2-instance-connect-selinux.rpm
+    sudo yum install -y /tmp/ec2-instance-connect/ec2-instance-connect.rpm /tmp/ec2-instance-connect/ec2-instance-connect-selinux.rpm
   EOF
 
   # natgw 出来た後に installしないとエラーになる
@@ -113,9 +118,14 @@ resource "aws_instance" "ec2_instance_private" {
 
   # Redhatの場合
   user_data = <<-EOF
+    #!/bin/bash
     sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
     sudo systemctl enable amazon-ssm-agent
     sudo systemctl start amazon-ssm-agent
+    mkdir /tmp/ec2-instance-connect
+    curl https://amazon-ec2-instance-connect-us-west-2.s3.us-west-2.amazonaws.com/latest/linux_amd64/ec2-instance-connect.rpm -o /tmp/ec2-instance-connect/ec2-instance-connect.rpm
+    curl https://amazon-ec2-instance-connect-us-west-2.s3.us-west-2.amazonaws.com/latest/linux_amd64/ec2-instance-connect-selinux.noarch.rpm -o /tmp/ec2-instance-connect/ec2-instance-connect-selinux.rpm
+    sudo yum install -y /tmp/ec2-instance-connect/ec2-instance-connect.rpm /tmp/ec2-instance-connect/ec2-instance-connect-selinux.rpm
   EOF
 
   # natgw 出来た後に installしないとエラーになる
