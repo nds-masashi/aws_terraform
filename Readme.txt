@@ -40,3 +40,9 @@ terraform init
 terraform plan
 terraform apply
 terraform destroy
+
+-----
+コマンド補完を有効にする
+https://docs.aws.amazon.com/ja_jp/cli/v1/userguide/cli-configure-completion.html
+
+complete -C '/usr/local/bin/aws_completer' aws
