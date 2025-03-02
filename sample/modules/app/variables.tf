@@ -1,6 +1,5 @@
 variable "resourceName" {
   type        = string
-  default     = "sample"
   description = "resource name"
 }
 

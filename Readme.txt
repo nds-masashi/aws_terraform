@@ -43,6 +43,13 @@ terraform destroy
 
 terraform init --upgrade
 
+terraform.tfvarsファイルを作成して
+resourceName = "user"
+email        = "user@sample.co.jp"
+domain       = "mail.sample.co.jp"
+user         = "xxxxx"
+pass         = "xxxxx"
+
 -----
 コマンド補完を有効にする
 https://docs.aws.amazon.com/ja_jp/cli/v1/userguide/cli-configure-completion.html

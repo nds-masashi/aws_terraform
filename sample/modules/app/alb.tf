@@ -58,7 +58,7 @@ resource "aws_lb" "ec2_alb" {
   subnets = [aws_subnet.public_subnet.id,
   aws_subnet.public_subnet_2.id]
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   #   access_logs {
   #     bucket  = aws_s3_bucket.lb_logs.id

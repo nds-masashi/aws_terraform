@@ -1,9 +1,15 @@
+variable "resourceName" {}
+variable "email" {}
+variable "domain" {}
+variable "user" {}
+variable "pass" {}
+
 module "main" {
   source = "../../modules/app"
 
-  resourceName = "user"
-  email        = "user@sample.co.jp"
-  domain       = "mail.sample.co.jp"
-  user         = "xxxxx"
-  pass         = "xxxxx"
+  resourceName = var.resourceName
+  email = var.email
+  domain = var.domain
+  user = var.user
+  pass = var.user
 }
