@@ -1,6 +1,6 @@
 #エンドポイント セキュリティーグループ
 resource "aws_security_group" "allow_https_ep_sg" {
-  name        = "allow_https_ep_sg"
+  name        = "allow-https-ep-sg"
   description = "allow https ep sq"
   vpc_id      = aws_vpc.vpc.id
 
@@ -56,7 +56,7 @@ resource "aws_vpc_endpoint" "ec2messages" {
 
 # EIC Endpointのセキュリティグループ
 resource "aws_security_group" "allow_ssh_eic_sg" {
-  name        = "allow_ssh_eic_sg"
+  name        = "allow-ssh-eic-sg"
   description = "Allow ssh eic sg"
   vpc_id      = aws_vpc.vpc.id
 

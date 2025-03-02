@@ -1,9 +1,16 @@
 #EC2セキュリティーグループ
 resource "aws_security_group" "allow_ssh_ec2_sg" {
-  name        = "allow_ssh_ec2_sg"
+  name        = "allow-ssh-ec2-sg"
   description = "Allow ssh ec2 sg"
   vpc_id      = aws_vpc.vpc.id
 
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.ec2_alb_sg.id]
+    description     = "http"
+  }
   ingress {
     from_port = 22
     to_port   = 22
