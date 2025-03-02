@@ -41,6 +41,8 @@ terraform plan
 terraform apply
 terraform destroy
 
+terraform init --upgrade
+
 -----
 コマンド補完を有効にする
 https://docs.aws.amazon.com/ja_jp/cli/v1/userguide/cli-configure-completion.html
