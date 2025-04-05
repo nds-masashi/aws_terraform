@@ -55,3 +55,20 @@ pass         = "xxxxx"
 https://docs.aws.amazon.com/ja_jp/cli/v1/userguide/cli-configure-completion.html
 
 complete -C '/usr/local/bin/aws_completer' aws
+
+-----
+フォルダ構成
+envs
+  dev
+    main.tf
+  stg
+  prd
+modules
+  app
+    ec2.tf
+    etc
+
+envs 配下に環境ごとの設定値
+modules 配下に、構築するリソース
+
+envs/dev 配下で、terraform コマンドを打つこと
