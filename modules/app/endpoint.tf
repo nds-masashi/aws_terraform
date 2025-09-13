@@ -1,7 +1,7 @@
 #エンドポイント セキュリティーグループ
-resource "aws_security_group" "allow_https_ep_sg" {
-  name        = "allow-https-ep-sg"
-  description = "allow https ep sq"
+resource "aws_security_group" "allow_ep_sg" {
+  name        = "allow-ep-sg"
+  description = "allow ep sg"
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
@@ -24,7 +24,7 @@ resource "aws_vpc_endpoint" "ssm" {
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   subnet_ids          = [aws_subnet.public_subnet.id]
-  security_group_ids  = [aws_security_group.allow_https_ep_sg.id]
+  security_group_ids  = [aws_security_group.allow_ep_sg.id]
 }
 
 resource "aws_vpc_endpoint" "ssmmessages" {
@@ -33,7 +33,7 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   subnet_ids          = [aws_subnet.public_subnet.id]
-  security_group_ids  = [aws_security_group.allow_https_ep_sg.id]
+  security_group_ids  = [aws_security_group.allow_ep_sg.id]
 }
 
 resource "aws_vpc_endpoint" "ec2" {
@@ -42,7 +42,7 @@ resource "aws_vpc_endpoint" "ec2" {
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   subnet_ids          = [aws_subnet.public_subnet.id]
-  security_group_ids  = [aws_security_group.allow_https_ep_sg.id]
+  security_group_ids  = [aws_security_group.allow_ep_sg.id]
 }
 
 # resource "aws_vpc_endpoint" "ec2messages" { // 不要
@@ -51,13 +51,24 @@ resource "aws_vpc_endpoint" "ec2" {
 #   vpc_endpoint_type   = "Interface"
 #   private_dns_enabled = true
 #   subnet_ids          = [aws_subnet.public_subnet.id]
-#   security_group_ids  = [aws_security_group.allow_https_ep_sg.id]
+#   security_group_ids  = [aws_security_group.allow_ep_sg.id]
 # }
 
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id            = aws_vpc.vpc.id
+  service_name      = "com.amazonaws.ap-northeast-1.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [aws_route_table.public_rt.id]
+
+  tags = {
+    Name = "${var.resourceName}-endpoint-s3"
+  }
+}
+
 # EIC Endpointのセキュリティグループ
-resource "aws_security_group" "allow_ssh_eic_sg" {
-  name        = "allow-ssh-eic-sg"
-  description = "Allow ssh eic sg"
+resource "aws_security_group" "allow_eic_sg" {
+  name        = "allow-eic-sg"
+  description = "Allow eic sg"
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
@@ -83,7 +94,7 @@ resource "aws_security_group" "allow_ssh_eic_sg" {
 
 resource "aws_ec2_instance_connect_endpoint" "eic" {
   subnet_id          = aws_subnet.private_subnet.id
-  security_group_ids = [aws_security_group.allow_ssh_eic_sg.id]
+  security_group_ids = [aws_security_group.allow_eic_sg.id]
   preserve_client_ip = true
 
   tags = {

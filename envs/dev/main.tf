@@ -8,8 +8,8 @@ module "main" {
   source = "../../modules/app"
 
   resourceName = var.resourceName
-  email = var.email
-  domain = var.domain
-  user = var.user
-  pass = var.user
+  email        = var.email
+  domain       = var.domain
+  user         = var.user
+  pass         = var.user
 }

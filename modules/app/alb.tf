@@ -25,8 +25,8 @@ resource "aws_lb_listener" "ec2_alb_listener" {
 }
 
 resource "aws_security_group" "ec2_alb_sg" {
-  name        = "allow-https-alb-sg"
-  description = "Allow https alb sg"
+  name        = "allow-alb-sg"
+  description = "Allow alb sg"
   vpc_id      = aws_vpc.vpc.id
 
   ingress {

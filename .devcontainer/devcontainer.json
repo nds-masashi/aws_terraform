@@ -13,6 +13,7 @@
 	// "features": {},
 
 	"mounts": [
+		// ${localEnv:USER} shellがbashでないとエラーになります
 		"source=/mnt/c/Users/${localEnv:USER}/.aws,target=/home/node/.aws,type=bind,consistency=cached"
 	],
 
